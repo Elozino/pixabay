@@ -41,7 +41,7 @@ const ImageScreen = () => {
     let calculatedWidth = maxWidth;
 
     if (aspectRatio < 1) {
-      calculatedWidth = calculatedHeight + aspectRatio;
+      calculatedWidth = calculatedHeight * aspectRatio;
     }
     return {
       width: calculatedWidth,
@@ -178,7 +178,6 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     backgroundColor: 'rgba(255,255,255,0.1)',
     borderColor: 'rgba(255,255,255,0.1)',
-    padding: 20,
   },
   loading: {
     position: 'absolute',
