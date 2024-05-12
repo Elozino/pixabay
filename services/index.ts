@@ -10,7 +10,6 @@ const formatURL = (params: Record<string, string | number | boolean>) => {
     const value = key === "q" ? encodeURIComponent(params[key]) : params[key];
     url += `&${key}=${value}`;
   });
-  console.log("url: ", url);
   return url;
 };
 
