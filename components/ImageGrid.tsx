@@ -4,14 +4,23 @@ import React from 'react';
 import { Pressable, StyleSheet, View } from 'react-native';
 import { Image } from 'expo-image';
 import { theme } from '@/constants/theme';
+import { ExpoRouter } from 'expo-router/types/expo-router';
 
-const ImageGrid = ({ images }: { images: any[] }) => {
+const ImageGrid = ({
+  images,
+  router,
+}: {
+  images: unknown[];
+  router: ExpoRouter.Router;
+}) => {
   return (
     <View style={styles.container}>
       <MasonryFlashList
         data={images}
         numColumns={getColumnCount()}
-        renderItem={({ item, index }) => <ImageCard item={item} index={index} />}
+        renderItem={({ item, index }) => (
+          <ImageCard item={item} index={index} router={router} />
+        )}
         estimatedItemSize={500}
         contentContainerStyle={styles.listContainerStyle}
       />
@@ -45,9 +54,10 @@ const styles = StyleSheet.create({
   }
 })
 
-const ImageCard = ({ item, index }: {
+const ImageCard = ({ item, index, router }: {
   item: any;
   index: number;
+  router: ExpoRouter.Router;
 }) => {
   const getImageHeight = () => {
     let { imageHeight: height, imageWidth: width } = item;
@@ -56,7 +66,10 @@ const ImageCard = ({ item, index }: {
 
   const isLastInRow = (index + 1) % getColumnCount() === 0
   return (
-    <Pressable style={[styles.imageWrapper, !isLastInRow && styles.spacing]}>
+    <Pressable
+      onPress={() => router.push({ pathname: 'image', params: { ...item } })}
+
+      style={[styles.imageWrapper, !isLastInRow && styles.spacing]}>
       <Image
         source={item?.webformatURL}
         style={[styles.image, getImageHeight()]}

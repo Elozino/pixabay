@@ -9,6 +9,11 @@ import { useColorScheme } from '@/components/useColorScheme';
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 
+import {
+  BottomSheetModalProvider,
+} from '@gorhom/bottom-sheet';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+
 
 export const unstable_settings = {
   // Ensure that reloading on `/modal` keeps a back button present.
@@ -48,11 +53,21 @@ function RootLayoutNav() {
   return (
     // <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
     <ThemeProvider value={DefaultTheme}>
-      <StatusBar style='dark' />
-      <Stack screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="index" />
-        <Stack.Screen name="home" />
-      </Stack>
+      <GestureHandlerRootView>
+        <BottomSheetModalProvider>
+          <StatusBar style='auto' />
+          <Stack screenOptions={{ headerShown: false }}>
+            <Stack.Screen name="index" />
+            <Stack.Screen name="home" />
+            <Stack.Screen name="image"
+              options={{
+                presentation: "transparentModal",
+                animation: 'fade_from_bottom'
+              }}
+            />
+          </Stack>
+        </BottomSheetModalProvider>
+      </GestureHandlerRootView>
     </ThemeProvider>
   );
 }

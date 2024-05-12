@@ -19,4 +19,23 @@ export const categories = [
   "buildings",
   "business",
   "music",
-]
+];
+
+export const filter = {
+  order: ["popular", "latest"],
+  orientation: ["horizontal", "vertical"],
+  type: ["photo", "illustration", "vector"],
+  colors: [
+    "red",
+    "orange",
+    "yellow",
+    "green",
+    "turquoise",
+    "blue",
+    "pink",
+    "gray",
+    "black",
+    "brown",
+    "white",
+  ],
+};
